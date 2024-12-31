@@ -19,3 +19,31 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+
+void stat(const double data[], int size, double result[]) {
+    double sum = 0.0, sumSq = 0.0, prod = 1.0, harmonicSum = 0.0;
+    double maxVal = data[0], minVal = data[0];
+
+    for (int i = 0; i < size; ++i) {
+        sum += data[i];
+        sumSq += data[i] * data[i];
+        prod *= data[i];
+        harmonicSum += 1.0 / data[i];
+
+        if (data[i] > maxVal) maxVal = data[i];
+        if (data[i] < minVal) minVal = data[i];
+    }
+
+    double mean = sum / size;
+    double variance = (sumSq / size) - (mean * mean);
+    double stddev = sqrt(variance);
+    double geomMean = pow(prod, 1.0 / size);
+    double harmMean = size / harmonicSum;
+
+    result[0] = mean;
+    result[1] = stddev;
+    result[2] = geomMean;
+    result[3] = harmMean;
+    result[4] = maxVal;
+    result[5] = minVal;
+}
